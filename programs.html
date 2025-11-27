@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Programs - Leano College of Applied Education</title>
+    <meta name="description" content="Explore our comprehensive range of practical, career-focused programs designed to launch your career in Business, ICT, Education, Technical Skills, Entrepreneurship, and Healthcare.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <style>
+        :root {
+            --forest-green: #1B4332;
+            --terracotta: #D4A574;
+            --cream: #F8F6F0;
+            --sage-green: #74A57F;
+            --charcoal: #2D3436;
+            --white: #FFFFFF;
+            --shadow-light: rgba(27, 67, 50, 0.1);
+            --shadow-medium: rgba(27, 67, 50, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: linear-gradient(135deg, var(--cream) 0%, #F0F4F1 100%);
+            overflow-x: hidden;
+        }
+
+        /* Aurora Background Animation */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, 
+                var(--cream) 0%, 
+                #E8F0E9 25%, 
+                #F0F4F1 50%, 
+                #E8F0E9 75%, 
+                var(--cream) 100%);
+            animation: aurora-flow 20s ease-in-out infinite;
+        }
+
+        @keyframes aurora-flow {
+            0%, 100% { 
+                background: linear-gradient(135deg, 
+                    var(--cream) 0%, 
+                    #E8F0E9 25%, 
+                    #F0F4F1 50%, 
+                    #E8F0E9 75%, 
+                    var(--cream) 100%);
+            }
+            25% { 
+                background: linear-gradient(135deg, 
+                    #E8F0E9 0%, 
+                    #F0F4F1 25%, 
+                    var(--cream) 50%, 
+                    #E8F0E9 75%, 
+                    #F0F4F1 100%);
+            }
+            50% { 
+                background: linear-gradient(135deg, 
+                    #F0F4F1 0%, 
+                    var(--cream) 25%, 
+                    #E8F0E9 50%, 
+                    #F0F4F1 75%, 
+                    var(--cream) 100%);
+            }
+            75% { 
+                background: linear-gradient(135deg, 
+                    #E8F0E9 0%, 
+                    #F0F4F1 25%, 
+                    var(--cream) 50%, 
+                    #E8F0E9 75%, 
+                    #F0F4F1 100%);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 246, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(27, 67, 50, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--forest-green);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Search and Filter */
+        .search-filter {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--forest-green);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        .filter-select {
+            padding: 1rem 2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            background: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--forest-green);
+        }
+
+        /* Programs Grid */
+        .programs-section {
+            padding: 4rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--shadow-medium);
+        }
+
+        .program-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .program-content {
+            padding: 2rem;
+        }
+
+        .program-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .program-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-duration {
+            color: var(--terracotta);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .program-description {
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .program-highlights {
+            margin-bottom: 1.5rem;
+        }
+
+        .program-highlights h4 {
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlights-list li {
+            padding: 0.25rem 0;
+            color: var(--charcoal);
+            opacity: 0.8;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .highlights-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--sage-green);
+            font-weight: bold;
+        }
+
+        .program-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem 2rem;
+            background: var(--forest-green);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0f2a1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(27, 67, 50, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--forest-green);
+            text-decoration: none;
+            border: 2px solid var(--forest-green);
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--forest-green);
+            color: white;
+        }
+
+        /* Program Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-header-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-duration {
+            font-size: 1.2rem;
+            color: var(--terracotta);
+            font-weight: 500;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .modal-content {
+            padding: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h3 {
+            color: var(--forest-green);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .course-item {
+            background: rgba(27, 67, 50, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--sage-green);
+        }
+
+        .course-item h4 {
+            color: var(--forest-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-item p {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+        }
+
+        .career-outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .career-item {
+            background: var(--terracotta);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem;
+            background: rgba(248, 246, 240, 0.5);
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: var(--forest-green);
+            color: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--terracotta);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .program-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Leano College</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="admin.html">Staff Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our Programs</h1>
+        <p>Choose from our range of practical, career-focused programs designed to give you the skills employers want.</p>
+        
+        <div class="search-filter">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search programs...">
+            </div>
+            <select class="filter-select" id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="business">Business</option>
+                <option value="technology">Technology</option>
+                <option value="education">Education</option>
+                <option value="technical">Technical</option>
+                <option value="healthcare">Healthcare</option>
+            </select>
+            <select class="filter-select" id="durationFilter">
+                <option value="">All Durations</option>
+                <option value="12">12 Months</option>
+                <option value="15">15 Months</option>
+                <option value="18">18 Months</option>
+                <option value="24">24 Months</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <div class="section-container">
+            <div class="programs-grid" id="programsGrid">
+                <!-- Business Administration -->
+                <div class="program-card" data-category="business" data-duration="18" data-keywords="business administration management marketing entrepreneurship">
+                    <img src="resources/program-business.jpg" alt="Business Administration" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Diploma in Business Administration</h3>
+                            <div class="program-duration">18 Months</div>
+                        </div>
+                        <p class="program-description">Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry with practical skills that employers value.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Business planning and strategy</li>
+                                <li>Marketing and sales techniques</li>
+                                <li>Financial management basics</li>
+                                <li>Leadership and team management</li>
+                                <li>Digital marketing tools</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Diploma in Business Administration')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('business')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ICT & Digital Skills -->
+                <div class="program-card" data-category="technology" data-duration="12" data-keywords="ict digital skills computer technology web development">
+                    <img src="resources/program-ict.jpg" alt="ICT & Digital Skills" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Certificate in ICT & Digital Skills</h3>
+                            <div class="program-duration">12 Months</div>
+                        </div>
+                        <p class="program-description">Learn essential digital skills, web development, and computer applications. Start your career in the growing tech sector with hands-on training.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Computer hardware and software</li>
+                                <li>Web development basics</li>
+                                <li>Microsoft Office suite</li>
+                                <li>Digital literacy and security</li>
+                                <li>IT support fundamentals</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Certificate in ICT & Digital Skills')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('ict')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Early Childhood Education -->
+                <div class="program-card" data-category="education" data-duration="24" data-keywords="early childhood education teaching children development">
+                    <img src="resources/program-education.jpg" alt="Early Childhood Education" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Diploma in Early Childhood Education</h3>
+                            <div class="program-duration">24 Months</div>
+                        </div>
+                        <p class="program-description">Shape the future by educating young minds. Learn child development, teaching methods, and classroom management to become a qualified early childhood educator.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Child development principles</li>
+                                <li>Curriculum design for young children</li>
+                                <li>Classroom management techniques</li>
+                                <li>Health and safety protocols</li>
+                                <li>Parent communication skills</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Diploma in Early Childhood Education')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('education')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="program-card" data-category="technical" data-duration="15" data-keywords="technical skills carpentry electrical construction trades">
+                    <img src="resources/program-technical.jpg" alt="Technical Skills" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Certificate in Technical Skills</h3>
+                            <div class="program-duration">15 Months</div>
+                        </div>
+                        <p class="program-description">Hands-on training in carpentry, electrical work, and construction. Build practical skills for immediate employment in the growing construction industry.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Carpentry and woodworking</li>
+                                <li>Basic electrical installation</li>
+                                <li>Construction safety protocols</li>
+                                <li>Blueprint reading</li>
+                                <li>Tool usage and maintenance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Certificate in Technical Skills')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('technical')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entrepreneurship -->
+                <div class="program-card" data-category="business" data-duration="18" data-keywords="entrepreneurship business startup innovation">
+                    <img src="resources/program-entrepreneurship.jpg" alt="Entrepreneurship" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Diploma in Entrepreneurship</h3>
+                            <div class="program-duration">18 Months</div>
+                        </div>
+                        <p class="program-description">Turn your business ideas into reality. Learn business planning, funding strategies, and growth techniques to build successful ventures that create jobs.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Business idea validation</li>
+                                <li>Business plan development</li>
+                                <li>Funding and investment strategies</li>
+                                <li>Marketing and branding</li>
+                                <li>Financial management</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Diploma in Entrepreneurship')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('entrepreneurship')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Healthcare Support -->
+                <div class="program-card" data-category="healthcare" data-duration="12" data-keywords="healthcare medical patient care health support">
+                    <img src="resources/program-healthcare.jpg" alt="Healthcare Support" class="program-image">
+                    <div class="program-content">
+                        <div class="program-header">
+                            <h3 class="program-title">Certificate in Healthcare Support</h3>
+                            <div class="program-duration">12 Months</div>
+                        </div>
+                        <p class="program-description">Join the growing healthcare sector. Learn patient care, medical terminology, and healthcare facility operations to start a rewarding career helping others.</p>
+                        
+                        <div class="program-highlights">
+                            <h4>What You'll Learn:</h4>
+                            <ul class="highlights-list">
+                                <li>Patient care techniques</li>
+                                <li>Medical terminology</li>
+                                <li>Health and safety protocols</li>
+                                <li>Medical records management</li>
+                                <li>Communication skills</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-actions">
+                            <button class="btn-primary" onclick="openForm('Certificate in Healthcare Support')">
+                                Express Interest
+                            </button>
+                            <button class="btn-secondary" onclick="showProgramDetail('healthcare')">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <h2>Our Impact</h2>
+            <p>See how Leano College is transforming lives and building careers in Lesotho.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2500">0</span>
+                    <div class="stat-label">Students Graduated</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="85">0</span>
+                    <div class="stat-label">Employment Rate %</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="12">0</span>
+                    <div class="stat-label">Program Options</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span>
+                    <div class="stat-label">Years of Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <p>&copy; 2024 Leano College of Applied Education. Empowering futures through practical education.</p>
+        </div>
+    </footer>
+
+    <!-- Program Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="">
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+                <div class="modal-header-content">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-duration" id="modalDuration"></div>
+                </div>
+            </div>
+            
+            <div class="modal-content">
+                <div class="modal-section">
+                    <h3>Program Overview</h3>
+                    <p id="modalOverview"></p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Course Modules</h3>
+                    <div class="course-list" id="modalCourses"></div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Career Opportunities</h3>
+                    <div class="career-outcomes" id="modalCareers"></div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Entry Requirements</h3>
+                    <ul id="modalRequirements"></ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="openFormFromModal()">
+                    Express Interest
+                </button>
+                <button class="btn-secondary" onclick="closeModal()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interest Form Overlay (from main.js) -->
+    <div class="form-overlay" id="formOverlay">
+        <div class="form-container">
+            <button class="close-form" onclick="closeForm()">&times;</button>
+            <div class="success-message" id="successMessage">
+                Thank you! We'll contact you within 24 hours to discuss your future at Leano College.
+            </div>
+            
+            <h2 class="form-title">Express Your Interest</h2>
+            <p class="form-subtitle">Take the first step towards your future. No commitment required.</p>
+            
+            <form id="interestForm">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="program">Program of Interest</label>
+                    <select id="program" name="program">
+                        <option value="">Select a program...</option>
+                        <option value="Diploma in Business Administration">Diploma in Business Administration</option>
+                        <option value="Certificate in ICT & Digital Skills">Certificate in ICT & Digital Skills</option>
+                        <option value="Diploma in Early Childhood Education">Diploma in Early Childhood Education</option>
+                        <option value="Certificate in Technical Skills">Certificate in Technical Skills</option>
+                        <option value="Diploma in Entrepreneurship">Diploma in Entrepreneurship</option>
+                        <option value="Certificate in Healthcare Support">Certificate in Healthcare Support</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    Submit Interest
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Programs page specific functionality
+        class ProgramsPage {
+            constructor() {
+                this.programs = this.getProgramData();
+                this.init();
+            }
+
+            init() {
+                this.setupSearch();
+                this.setupFilters();
+                this.animateStats();
+                this.setupModal();
+            }
+
+            getProgramData() {
+                return {
+                    business: {
+                        title: "Diploma in Business Administration",
+                        duration: "18 Months",
+                        image: "resources/program-business.jpg",
+                        overview: "Our comprehensive Business Administration program equips you with the essential skills needed to succeed in today's competitive business environment. You'll master financial management, marketing strategies, leadership principles, and operational excellence through hands-on projects and real-world case studies.",
+                        courses: [
+                            { name: "Business Communication", description: "Master professional communication skills for the workplace" },
+                            { name: "Financial Management", description: "Learn budgeting, financial analysis, and investment decisions" },
+                            { name: "Marketing Principles", description: "Understand consumer behavior and marketing strategies" },
+                            { name: "Leadership & Management", description: "Develop leadership skills and team management techniques" },
+                            { name: "Business Law & Ethics", description: "Navigate legal requirements and ethical considerations" },
+                            { name: "Operations Management", description: "Optimize business processes and supply chain management" }
+                        ],
+                        careers: ["Business Manager", "Marketing Coordinator", "Financial Analyst", "Operations Supervisor", "Entrepreneur"],
+                        requirements: ["High school diploma or equivalent", "Basic mathematics proficiency", "English language competency", "Interview with program coordinator"]
+                    },
+                    ict: {
+                        title: "Certificate in ICT & Digital Skills",
+                        duration: "12 Months",
+                        image: "resources/program-ict.jpg",
+                        overview: "This intensive program prepares you for the digital workplace with essential ICT skills. From computer fundamentals to web development, you'll gain practical knowledge that employers demand in today's technology-driven world.",
+                        courses: [
+                            { name: "Computer Fundamentals", description: "Hardware, software, and operating systems" },
+                            { name: "Microsoft Office Suite", description: "Word, Excel, PowerPoint, and Access" },
+                            { name: "Web Development Basics", description: "HTML, CSS, and JavaScript fundamentals" },
+                            { name: "Digital Literacy", description: "Internet safety and digital citizenship" },
+                            { name: "Database Management", description: "Introduction to database design and SQL" },
+                            { name: "IT Support Fundamentals", description: "Troubleshooting and customer support skills" }
+                        ],
+                        careers: ["IT Support Specialist", "Web Developer", "Data Entry Specialist", "Digital Marketing Assistant", "Technical Support"],
+                        requirements: ["High school diploma or equivalent", "Basic computer literacy", "Interest in technology", "Problem-solving aptitude"]
+                    },
+                    education: {
+                        title: "Diploma in Early Childhood Education",
+                        duration: "24 Months",
+                        image: "resources/program-education.jpg",
+                        overview: "Shape the future by becoming a qualified early childhood educator. This comprehensive program covers child development, curriculum design, and classroom management to prepare you for a rewarding career working with young children.",
+                        courses: [
+                            { name: "Child Development", description: "Physical, cognitive, and emotional development stages" },
+                            { name: "Curriculum Design", description: "Creating age-appropriate learning activities" },
+                            { name: "Classroom Management", description: "Behavior guidance and positive discipline techniques" },
+                            { name: "Health & Safety", description: "Child health, nutrition, and safety protocols" },
+                            { name: "Parent Communication", description: "Building positive relationships with families" },
+                            { name: "Special Needs Inclusion", description: "Supporting children with diverse learning needs" }
+                        ],
+                        careers: ["Preschool Teacher", "Childcare Center Director", "Early Intervention Specialist", "Child Development Consultant", "Nanny"],
+                        requirements: ["High school diploma or equivalent", "Passion for working with children", "Patience and nurturing personality", "Clean criminal record check"]
+                    },
+                    technical: {
+                        title: "Certificate in Technical Skills",
+                        duration: "15 Months",
+                        image: "resources/program-technical.jpg",
+                        overview: "Get hands-on training in essential technical trades. This program combines theory with extensive practical experience in carpentry, electrical work, and construction to prepare you for immediate employment.",
+                        courses: [
+                            { name: "Carpentry Fundamentals", description: "Woodworking, joinery, and furniture making" },
+                            { name: "Electrical Basics", description: "Wiring, installation, and safety protocols" },
+                            { name: "Construction Techniques", description: "Building methods and material handling" },
+                            { name: "Blueprint Reading", description: "Technical drawings and specifications" },
+                            { name: "Tool Usage & Maintenance", description: "Proper use and care of hand and power tools" },
+                            { name: "Workplace Safety", description: "OSHA standards and safety procedures" }
+                        ],
+                        careers: ["Carpenter", "Electrician Assistant", "Construction Worker", "Maintenance Technician", "Cabinet Maker"],
+                        requirements: ["High school diploma or equivalent", "Physical fitness for manual work", "Good hand-eye coordination", "Safety-conscious attitude"]
+                    },
+                    entrepreneurship: {
+                        title: "Diploma in Entrepreneurship",
+                        duration: "18 Months",
+                        image: "resources/program-entrepreneurship.jpg",
+                        overview: "Transform your business ideas into successful ventures. This program provides comprehensive training in business planning, funding strategies, and growth management to help you build sustainable businesses.",
+                        courses: [
+                            { name: "Business Idea Validation", description: "Testing and refining business concepts" },
+                            { name: "Business Plan Development", description: "Creating comprehensive business strategies" },
+                            { name: "Funding & Investment", description: "Securing capital and managing finances" },
+                            { name: "Marketing & Branding", description: "Building your brand and customer base" },
+                            { name: "Operations Management", description: "Running efficient business operations" },
+                            { name: "Growth Strategies", description: "Scaling and expanding your business" }
+                        ],
+                        careers: ["Business Owner", "Startup Founder", "Business Consultant", "Franchise Owner", "Social Entrepreneur"],
+                        requirements: ["High school diploma or equivalent", "Business idea or interest", "Motivation and drive", "Willingness to take calculated risks"]
+                    },
+                    healthcare: {
+                        title: "Certificate in Healthcare Support",
+                        duration: "12 Months",
+                        image: "resources/program-healthcare.jpg",
+                        overview: "Join the growing healthcare sector with practical training in patient care and medical support services. This program prepares you for entry-level positions in hospitals, clinics, and long-term care facilities.",
+                        courses: [
+                            { name: "Patient Care Techniques", description: "Basic care and comfort for patients" },
+                            { name: "Medical Terminology", description: "Essential medical language and communication" },
+                            { name: "Health & Safety Protocols", description: "Infection control and safety procedures" },
+                            { name: "Medical Records", description: "Documentation and patient information management" },
+                            { name: "Communication Skills", description: "Professional interaction with patients and families" },
+                            { name: "Emergency Procedures", description: "Basic first aid and emergency response" }
+                        ],
+                        careers: ["Healthcare Assistant", "Patient Care Technician", "Medical Receptionist", "Home Health Aide", "Hospital Ward Clerk"],
+                        requirements: ["High school diploma or equivalent", "Compassionate nature", "Good communication skills", "Physical stamina for patient care"]
+                    }
+                };
+            }
+
+            setupSearch() {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => {
+                        this.filterPrograms();
+                    });
+                }
+            }
+
+            setupFilters() {
+                const categoryFilter = document.getElementById('categoryFilter');
+                const durationFilter = document.getElementById('durationFilter');
+                
+                if (categoryFilter) {
+                    categoryFilter.addEventListener('change', () => {
+                        this.filterPrograms();
+                    });
+                }
+                
+                if (durationFilter) {
+                    durationFilter.addEventListener('change', () => {
+                        this.filterPrograms();
+                    });
+                }
+            }
+
+            filterPrograms() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const categoryFilter = document.getElementById('categoryFilter').value;
+                const durationFilter = document.getElementById('durationFilter').value;
+                
+                const programCards = document.querySelectorAll('.program-card');
+                
+                programCards.forEach(card => {
+                    const keywords = card.dataset.keywords.toLowerCase();
+                    const category = card.dataset.category;
+                    const duration = card.dataset.duration;
+                    
+                    const matchesSearch = !searchTerm || keywords.includes(searchTerm);
+                    const matchesCategory = !categoryFilter || category === categoryFilter;
+                    const matchesDuration = !durationFilter || duration === durationFilter;
+                    
+                    if (matchesSearch && matchesCategory && matchesDuration) {
+                        card.style.display = 'block';
+                        anime({
+                            targets: card,
+                            opacity: [0, 1],
+                            translateY: [20, 0],
+                            duration: 400,
+                            easing: 'easeOutQuart'
+                        });
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            animateStats() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const statNumbers = document.querySelectorAll('.stat-number');
+                            statNumbers.forEach(stat => {
+                                const target = parseInt(stat.dataset.count);
+                                this.animateNumber(stat, 0, target, 2000);
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                const statsSection = document.querySelector('.stats-section');
+                if (statsSection) {
+                    observer.observe(statsSection);
+                }
+            }
+
+            animateNumber(element, start, end, duration) {
+                const startTime = performance.now();
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const current = Math.floor(start + (end - start) * progress);
+                    element.textContent = current.toLocaleString();
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            }
+
+            setupModal() {
+                // Modal functionality is handled by global functions
+            }
+
+            showProgramDetail(programId) {
+                const program = this.programs[programId];
+                if (!program) return;
+
+                // Populate modal content
+                document.getElementById('modalTitle').textContent = program.title;
+                document.getElementById('modalDuration').textContent = program.duration;
+                document.getElementById('modalImage').src = program.image;
+                document.getElementById('modalOverview').textContent = program.overview;
+
+                // Populate courses
+                const coursesContainer = document.getElementById('modalCourses');
+                coursesContainer.innerHTML = '';
+                program.courses.forEach(course => {
+                    const courseElement = document.createElement('div');
+                    courseElement.className = 'course-item';
+                    courseElement.innerHTML = `
+                        <h4>${course.name}</h4>
+                        <p>${course.description}</p>
+                    `;
+                    coursesContainer.appendChild(courseElement);
+                });
+
+                // Populate careers
+                const careersContainer = document.getElementById('modalCareers');
+                careersContainer.innerHTML = '';
+                program.careers.forEach(career => {
+                    const careerElement = document.createElement('div');
+                    careerElement.className = 'career-item';
+                    careerElement.textContent = career;
+                    careersContainer.appendChild(careerElement);
+                });
+
+                // Populate requirements
+                const requirementsContainer = document.getElementById('modalRequirements');
+                requirementsContainer.innerHTML = '';
+                program.requirements.forEach(requirement => {
+                    const requirementElement = document.createElement('li');
+                    requirementElement.textContent = requirement;
+                    requirementsContainer.appendChild(requirementElement);
+                });
+
+                // Store current program for form
+                window.currentModalProgram = program.title;
+
+                // Show modal
+                document.getElementById('modalOverlay').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                // Animate modal appearance
+                anime({
+                    targets: '.modal-container',
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 400,
+                    easing: 'easeOutBack'
+                });
+            }
+        }
+
+        // Global functions for modal
+        function showProgramDetail(programId) {
+            window.programsPage.showProgramDetail(programId);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            anime({
+                targets: '.modal-container',
+                scale: [1, 0.8],
+                opacity: [1, 0],
+                duration: 300,
+                easing: 'easeInBack',
+                complete: () => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        function openFormFromModal() {
+            closeModal();
+            setTimeout(() => {
+                openForm(window.currentModalProgram);
+            }, 300);
+        }
+
+        // Initialize programs page
+        document.addEventListener('DOMContentLoaded', () => {
+            window.programsPage = new ProgramsPage();
+        });
+    </script>
+</body>
+</html>

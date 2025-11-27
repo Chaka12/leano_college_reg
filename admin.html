@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Leano College Lead Management</title>
+    <meta name="description" content="Staff dashboard for managing student leads and admissions at Leano College.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <style>
+        :root {
+            --forest-green: #1B4332;
+            --terracotta: #D4A574;
+            --cream: #F8F6F0;
+            --sage-green: #74A57F;
+            --charcoal: #2D3436;
+            --white: #FFFFFF;
+            --shadow-light: rgba(27, 67, 50, 0.1);
+            --shadow-medium: rgba(27, 67, 50, 0.2);
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: linear-gradient(135deg, var(--cream) 0%, #F0F4F1 100%);
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .admin-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, 
+                var(--cream) 0%, 
+                #E8F0E9 25%, 
+                #F0F4F1 50%, 
+                #E8F0E9 75%, 
+                var(--cream) 100%);
+            animation: aurora-flow 20s ease-in-out infinite;
+        }
+
+        @keyframes aurora-flow {
+            0%, 100% { 
+                background: linear-gradient(135deg, 
+                    var(--cream) 0%, 
+                    #E8F0E9 25%, 
+                    #F0F4F1 50%, 
+                    #E8F0E9 75%, 
+                    var(--cream) 100%);
+            }
+            25% { 
+                background: linear-gradient(135deg, 
+                    #E8F0E9 0%, 
+                    #F0F4F1 25%, 
+                    var(--cream) 50%, 
+                    #E8F0E9 75%, 
+                    #F0F4F1 100%);
+            }
+            50% { 
+                background: linear-gradient(135deg, 
+                    #F0F4F1 0%, 
+                    var(--cream) 25%, 
+                    #E8F0E9 50%, 
+                    #F0F4F1 75%, 
+                    var(--cream) 100%);
+            }
+            75% { 
+                background: linear-gradient(135deg, 
+                    #E8F0E9 0%, 
+                    #F0F4F1 25%, 
+                    var(--cream) 50%, 
+                    #E8F0E9 75%, 
+                    #F0F4F1 100%);
+            }
+        }
+
+        /* Login Modal */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .login-subtitle {
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--forest-green);
+        }
+
+        .login-button {
+            padding: 1rem 2rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .login-button:hover {
+            background: #0f2a1c;
+            transform: translateY(-1px);
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--forest-green);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-button {
+            padding: 0.5rem 1rem;
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: #c19660;
+        }
+
+        /* Main Content */
+        .admin-main {
+            margin-top: 80px;
+            padding: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--charcoal);
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-weight: 500;
+        }
+
+        .stat-change.positive {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        /* Controls */
+        .controls-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            margin-bottom: 2rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: var(--forest-green);
+        }
+
+        .export-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--sage-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: end;
+        }
+
+        .export-button:hover {
+            background: var(--forest-green);
+            transform: translateY(-1px);
+        }
+
+        /* Leads Table */
+        .leads-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            overflow: hidden;
+        }
+
+        .leads-header {
+            background: var(--forest-green);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leads-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .leads-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leads-table th,
+        .leads-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .leads-table th {
+            background: rgba(27, 67, 50, 0.05);
+            font-weight: 600;
+            color: var(--forest-green);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .leads-table th:hover {
+            background: rgba(27, 67, 50, 0.1);
+        }
+
+        .leads-table tr:hover {
+            background: rgba(27, 67, 50, 0.02);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-new {
+            background: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+        }
+
+        .status-contacted {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .status-admitted {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .status-denied {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-button {
+            padding: 0.5rem;
+            background: var(--sage-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: var(--forest-green);
+            transform: scale(1.05);
+        }
+
+        .action-button.delete {
+            background: var(--danger);
+        }
+
+        .action-button.delete:hover {
+            background: #c82333;
+        }
+
+        /* Lead Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            background: var(--forest-green);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-content {
+            padding: 2rem;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--forest-green);
+            min-width: 150px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: var(--charcoal);
+        }
+
+        .status-select {
+            padding: 0.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .save-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .save-button:hover {
+            background: #0f2a1c;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-main {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leads-table {
+                font-size: 0.8rem;
+            }
+
+            .leads-table th,
+            .leads-table td {
+                padding: 0.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .detail-label {
+                min-width: auto;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-bg"></div>
+
+    <!-- Login Modal -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <h2 class="login-title">Staff Login</h2>
+            <p class="login-subtitle">Access the Leano College Lead Management System</p>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="admin-header" id="adminHeader" style="display: none;">
+        <div class="admin-title">Lead Management Dashboard</div>
+        <div class="admin-user">
+            <span id="usernameDisplay">Staff Member</span>
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main" id="adminMain" style="display: none;">
+        <div class="admin-container">
+            <!-- Stats Grid -->
+            <div class="stats-grid fade-in">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalLeads">0</span>
+                    <div class="stat-label">Total Leads</div>
+                    <div class="stat-change positive">+12% this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" id="newLeads">0</span>
+                    <div class="stat-label">New Leads</div>
+                    <div class="stat-change positive">+8% this week</div>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" id="contactedLeads">0</span>
+                    <div class="stat-label">Contacted</div>
+                    <div class="stat-change positive">+15% this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" id="conversionRate">0%</span>
+                    <div class="stat-label">Conversion Rate</div>
+                    <div class="stat-change positive">+3% this month</div>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section slide-in-left">
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label for="filterStatus">Filter by Status</label>
+                        <select id="filterStatus">
+                            <option value="">All Statuses</option>
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="admitted">Admitted</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="filterProgram">Filter by Program</label>
+                        <select id="filterProgram">
+                            <option value="">All Programs</option>
+                            <option value="Diploma in Business Administration">Business Administration</option>
+                            <option value="Certificate in ICT & Digital Skills">ICT & Digital Skills</option>
+                            <option value="Diploma in Early Childhood Education">Early Childhood Education</option>
+                            <option value="Certificate in Technical Skills">Technical Skills</option>
+                            <option value="Diploma in Entrepreneurship">Entrepreneurship</option>
+                            <option value="Certificate in Healthcare Support">Healthcare Support</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="searchLeads">Search Leads</label>
+                        <input type="text" id="searchLeads" placeholder="Search by name, email, or phone...">
+                    </div>
+                    
+                    <button class="export-button" onclick="exportLeads()">
+                        📊 Export to CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Leads Table -->
+            <div class="leads-section slide-in-right">
+                <div class="leads-header">
+                    <div class="leads-title">Student Leads</div>
+                    <div class="leads-count" id="leadsCount">0 leads</div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortLeads('timestamp')">Date Submitted ↕</th>
+                                <th onclick="sortLeads('firstName')">Name ↕</th>
+                                <th onclick="sortLeads('email')">Email ↕</th>
+                                <th onclick="sortLeads('phone')">Phone ↕</th>
+                                <th onclick="sortLeads('program')">Program ↕</th>
+                                <th onclick="sortLeads('status')">Status ↕</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <!-- Leads will be populated here -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-state-icon">📋</div>
+                        <h3>No leads found</h3>
+                        <p>Try adjusting your filters or search criteria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="adminFooter" style="display: none;">
+        <div class="admin-container">
+            <p>&copy; 2024 Leano College of Applied Education. Staff Management System.</p>
+        </div>
+    </footer>
+
+    <!-- Lead Detail Modal -->
+    <div class="modal-overlay" id="leadModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Lead Details</h2>
+                <button class="close-modal" onclick="closeLeadModal()">&times;</button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="detail-row">
+                    <div class="detail-label">Name:</div>
+                    <div class="detail-value" id="modalName"></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Email:</div>
+                    <div class="detail-value" id="modalEmail"></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Phone:</div>
+                    <div class="detail-value" id="modalPhone"></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Program:</div>
+                    <div class="detail-value" id="modalProgram"></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Date Submitted:</div>
+                    <div class="detail-value" id="modalDate"></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Status:</div>
+                    <div class="detail-value">
+                        <select class="status-select" id="modalStatus">
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="admitted">Admitted</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Notes:</div>
+                    <div class="detail-value">
+                        <textarea class="notes-textarea" id="modalNotes" placeholder="Add notes about this lead..."></textarea>
+                    </div>
+                </div>
+                
+                <button class="save-button" onclick="saveLeadChanges()">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Admin Dashboard functionality
+        class AdminDashboard {
+            constructor() {
+                this.leads = [];
+                this.filteredLeads = [];
+                this.currentSort = { field: 'timestamp', direction: 'desc' };
+                this.currentLead = null;
+                this.init();
+            }
+
+            init() {
+                this.setupLogin();
+                this.loadLeads();
+                this.setupFilters();
+                this.setupSorting();
+                this.updateStats();
+                this.renderLeads();
+            }
+
+            setupLogin() {
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleLogin();
+                    });
+                }
+            }
+
+            handleLogin() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple demo authentication (replace with real auth in production)
+                if (username === 'admin' && password === 'leano2024') {
+                    this.showDashboard(username);
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            }
+
+            showDashboard(username) {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('adminHeader').style.display = 'flex';
+                document.getElementById('adminMain').style.display = 'block';
+                document.getElementById('adminFooter').style.display = 'block';
+                
+                document.getElementById('usernameDisplay').textContent = username;
+                
+                // Animate dashboard elements
+                anime({
+                    targets: '.fade-in',
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    duration: 600,
+                    delay: anime.stagger(100),
+                    easing: 'easeOutQuart'
+                });
+                
+                anime({
+                    targets: '.slide-in-left',
+                    opacity: [0, 1],
+                    translateX: [-30, 0],
+                    duration: 600,
+                    delay: 200,
+                    easing: 'easeOutQuart'
+                });
+                
+                anime({
+                    targets: '.slide-in-right',
+                    opacity: [0, 1],
+                    translateX: [30, 0],
+                    duration: 600,
+                    delay: 400,
+                    easing: 'easeOutQuart'
+                });
+            }
+
+            logout() {
+                document.getElementById('loginOverlay').style.display = 'flex';
+                document.getElementById('adminHeader').style.display = 'none';
+                document.getElementById('adminMain').style.display = 'none';
+                document.getElementById('adminFooter').style.display = 'none';
+                
+                // Clear form
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+
+            loadLeads() {
+                // Load leads from localStorage or use demo data
+                this.leads = JSON.parse(localStorage.getItem('leanoLeads') || '[]');
+                
+                // Add demo leads if none exist
+                if (this.leads.length === 0) {
+                    this.leads = this.getDemoLeads();
+                    localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+                }
+                
+                this.filteredLeads = [...this.leads];
+            }
+
+            getDemoLeads() {
+                return [
+                    {
+                        id: 'demo1',
+                        timestamp: new Date(Date.now() - 86400000).toISOString(),
+                        firstName: 'Thabo',
+                        lastName: 'Mokoena',
+                        phone: '+266 1234 5678',
+                        email: 'thabo@example.com',
+                        program: 'Diploma in Business Administration',
+                        status: 'new',
+                        notes: ''
+                    },
+                    {
+                        id: 'demo2',
+                        timestamp: new Date(Date.now() - 172800000).toISOString(),
+                        firstName: 'Lerato',
+                        lastName: 'Mohapi',
+                        phone: '+266 2345 6789',
+                        email: 'lerato@example.com',
+                        program: 'Certificate in ICT & Digital Skills',
+                        status: 'contacted',
+                        notes: 'Called on Oct 26, confirmed interest, invited to open house'
+                    },
+                    {
+                        id: 'demo3',
+                        timestamp: new Date(Date.now() - 259200000).toISOString(),
+                        firstName: 'Mampho',
+                        lastName: 'Letsie',
+                        phone: '+266 3456 7890',
+                        email: 'mampho@example.com',
+                        program: 'Diploma in Early Childhood Education',
+                        status: 'admitted',
+                        notes: 'Accepted offer, starting next semester'
+                    },
+                    {
+                        id: 'demo4',
+                        timestamp: new Date(Date.now() - 345600000).toISOString(),
+                        firstName: 'Tshepo',
+                        lastName: 'Khotsa',
+                        phone: '+266 4567 8901',
+                        email: 'tshepo@example.com',
+                        program: 'Certificate in Technical Skills',
+                        status: 'contacted',
+                        notes: 'Scheduled campus visit for next week'
+                    }
+                ];
+            }
+
+            setupFilters() {
+                const statusFilter = document.getElementById('filterStatus');
+                const programFilter = document.getElementById('filterProgram');
+                const searchInput = document.getElementById('searchLeads');
+                
+                if (statusFilter) {
+                    statusFilter.addEventListener('change', () => this.applyFilters());
+                }
+                
+                if (programFilter) {
+                    programFilter.addEventListener('change', () => this.applyFilters());
+                }
+                
+                if (searchInput) {
+                    searchInput.addEventListener('input', () => this.applyFilters());
+                }
+            }
+
+            applyFilters() {
+                const statusFilter = document.getElementById('filterStatus').value;
+                const programFilter = document.getElementById('filterProgram').value;
+                const searchTerm = document.getElementById('searchLeads').value.toLowerCase();
+                
+                this.filteredLeads = this.leads.filter(lead => {
+                    const matchesStatus = !statusFilter || lead.status === statusFilter;
+                    const matchesProgram = !programFilter || lead.program === programFilter;
+                    const matchesSearch = !searchTerm || 
+                        lead.firstName.toLowerCase().includes(searchTerm) ||
+                        lead.lastName.toLowerCase().includes(searchTerm) ||
+                        lead.email.toLowerCase().includes(searchTerm) ||
+                        lead.phone.toLowerCase().includes(searchTerm);
+                    
+                    return matchesStatus && matchesProgram && matchesSearch;
+                });
+                
+                this.renderLeads();
+                this.updateStats();
+            }
+
+            setupSorting() {
+                // Sorting is handled by onclick events in the table headers
+                window.sortLeads = (field) => {
+                    if (this.currentSort.field === field) {
+                        this.currentSort.direction = this.currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        this.currentSort.field = field;
+                        this.currentSort.direction = 'asc';
+                    }
+                    
+                    this.filteredLeads.sort((a, b) => {
+                        let aValue = a[field];
+                        let bValue = b[field];
+                        
+                        if (field === 'timestamp') {
+                            aValue = new Date(aValue);
+                            bValue = new Date(bValue);
+                        }
+                        
+                        if (aValue < bValue) return this.currentSort.direction === 'asc' ? -1 : 1;
+                        if (aValue > bValue) return this.currentSort.direction === 'asc' ? 1 : -1;
+                        return 0;
+                    });
+                    
+                    this.renderLeads();
+                };
+            }
+
+            updateStats() {
+                const totalLeads = this.leads.length;
+                const newLeads = this.leads.filter(lead => lead.status === 'new').length;
+                const contactedLeads = this.leads.filter(lead => lead.status === 'contacted').length;
+                const admittedLeads = this.leads.filter(lead => lead.status === 'admitted').length;
+                const conversionRate = totalLeads > 0 ? Math.round((admittedLeads / totalLeads) * 100) : 0;
+                
+                this.animateNumber('totalLeads', totalLeads);
+                this.animateNumber('newLeads', newLeads);
+                this.animateNumber('contactedLeads', contactedLeads);
+                this.animateNumber('conversionRate', conversionRate, '%');
+            }
+
+            animateNumber(elementId, target, suffix = '') {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+                
+                const start = 0;
+                const duration = 1000;
+                const startTime = performance.now();
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = Math.floor(start + (target - start) * progress);
+                    element.textContent = current + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            }
+
+            renderLeads() {
+                const tbody = document.getElementById('leadsTableBody');
+                const emptyState = document.getElementById('emptyState');
+                const leadsCount = document.getElementById('leadsCount');
+                
+                if (!tbody) return;
+                
+                if (this.filteredLeads.length === 0) {
+                    tbody.innerHTML = '';
+                    emptyState.style.display = 'block';
+                    leadsCount.textContent = '0 leads';
+                    return;
+                }
+                
+                emptyState.style.display = 'none';
+                leadsCount.textContent = `${this.filteredLeads.length} lead${this.filteredLeads.length !== 1 ? 's' : ''}`;
+                
+                tbody.innerHTML = this.filteredLeads.map(lead => `
+                    <tr>
+                        <td>${new Date(lead.timestamp).toLocaleDateString()}</td>
+                        <td>${lead.firstName} ${lead.lastName}</td>
+                        <td>${lead.email}</td>
+                        <td>${lead.phone}</td>
+                        <td>${lead.program}</td>
+                        <td><span class="status-badge status-${lead.status}">${lead.status}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-button" onclick="viewLead('${lead.id}')" title="View Details">
+                                    👁️
+                                </button>
+                                <button class="action-button delete" onclick="deleteLead('${lead.id}')" title="Delete">
+                                    🗑️
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            viewLead(leadId) {
+                const lead = this.leads.find(l => l.id === leadId);
+                if (!lead) return;
+                
+                this.currentLead = lead;
+                
+                // Populate modal
+                document.getElementById('modalName').textContent = `${lead.firstName} ${lead.lastName}`;
+                document.getElementById('modalEmail').textContent = lead.email;
+                document.getElementById('modalPhone').textContent = lead.phone;
+                document.getElementById('modalProgram').textContent = lead.program;
+                document.getElementById('modalDate').textContent = new Date(lead.timestamp).toLocaleString();
+                document.getElementById('modalStatus').value = lead.status;
+                document.getElementById('modalNotes').value = lead.notes || '';
+                
+                // Show modal
+                document.getElementById('leadModal').style.display = 'flex';
+            }
+
+            closeLeadModal() {
+                document.getElementById('leadModal').style.display = 'none';
+                this.currentLead = null;
+            }
+
+            saveLeadChanges() {
+                if (!this.currentLead) return;
+                
+                const newStatus = document.getElementById('modalStatus').value;
+                const newNotes = document.getElementById('modalNotes').value;
+                
+                // Update lead
+                const leadIndex = this.leads.findIndex(l => l.id === this.currentLead.id);
+                if (leadIndex !== -1) {
+                    this.leads[leadIndex].status = newStatus;
+                    this.leads[leadIndex].notes = newNotes;
+                    
+                    // Save to localStorage
+                    localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+                    
+                    // Update filtered leads
+                    this.applyFilters();
+                    
+                    // Close modal
+                    this.closeLeadModal();
+                    
+                    // Show success message
+                    alert('Lead updated successfully!');
+                }
+            }
+
+            deleteLead(leadId) {
+                if (confirm('Are you sure you want to delete this lead?')) {
+                    this.leads = this.leads.filter(l => l.id !== leadId);
+                    localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+                    this.applyFilters();
+                }
+            }
+
+            exportLeads() {
+                const csvContent = "data:text/csv;charset=utf-8," 
+                    + "Name,Email,Phone,Program,Status,Date Submitted,Notes\n"
+                    + this.filteredLeads.map(lead => 
+                        `"${lead.firstName} ${lead.lastName}","${lead.email}","${lead.phone}","${lead.program}","${lead.status}","${new Date(lead.timestamp).toLocaleDateString()}","${lead.notes || ''}"`
+                    ).join("\n");
+                
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", `leano-leads-${new Date().toISOString().split('T')[0]}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Global functions
+        function viewLead(leadId) {
+            window.adminDashboard.viewLead(leadId);
+        }
+
+        function deleteLead(leadId) {
+            window.adminDashboard.deleteLead(leadId);
+        }
+
+        function closeLeadModal() {
+            window.adminDashboard.closeLeadModal();
+        }
+
+        function saveLeadChanges() {
+            window.adminDashboard.saveLeadChanges();
+        }
+
+        function exportLeads() {
+            window.adminDashboard.exportLeads();
+        }
+
+        function logout() {
+            window.adminDashboard.logout();
+        }
+
+        // Initialize admin dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            window.adminDashboard = new AdminDashboard();
+        });
+    </script>
+</body>
+</html>
