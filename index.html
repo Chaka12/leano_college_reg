@@ -336,6 +336,10 @@
             border-radius: 25px;
             font-weight: 500;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
         }
 
         .program-cta:hover {
@@ -602,7 +606,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="programs.html">Programs</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="contact-us.html">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -630,7 +634,7 @@
                 </div>
 
                 <a href="programs.html" class="cta-button">
-                    Browse Programs
+                    Browse All Programs
                     <span>→</span>
                 </a>
             </div>
@@ -645,17 +649,18 @@
     <section class="programs-preview">
         <div class="section-container">
             <div class="section-header fade-in">
-                <h2>Our Programs</h2>
+                <h2>Featured Programs</h2>
                 <p>Choose from our range of practical, career-focused programs designed to give you the skills employers want.</p>
             </div>
 
             <div class="programs-grid">
+                <!-- Business Administration -->
                 <div class="program-card fade-in" data-program="business">
                     <img src="resources/program-business.jpg" alt="Business Administration" class="program-image">
                     <div class="program-content">
                         <h3>Diploma in Business Administration</h3>
                         <div class="program-duration">18 Months</div>
-                        <p class="program-description">Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry.</p>
+                        <p class="program-description">Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry with practical skills that employers value.</p>
                         <button class="program-cta" onclick="openForm('Diploma in Business Administration')">
                             Express Interest
                             <span>→</span>
@@ -663,70 +668,82 @@
                     </div>
                 </div>
 
-                <div class="program-card fade-in" data-program="ict">
-                    <img src="resources/program-ict.jpg" alt="ICT & Digital Skills" class="program-image">
+                <!-- Information Technology -->
+                <div class="program-card fade-in" data-program="it">
+                    <img src="resources/program-ict.jpg" alt="Information Technology" class="program-image">
                     <div class="program-content">
-                        <h3>Certificate in ICT & Digital Skills</h3>
-                        <div class="program-duration">12 Months</div>
-                        <p class="program-description">Learn essential digital skills, web development, and computer applications. Start your career in the growing tech sector.</p>
-                        <button class="program-cta" onclick="openForm('Certificate in ICT & Digital Skills')">
+                        <h3>Diploma in Information Technology</h3>
+                        <div class="program-duration">36 Months</div>
+                        <p class="program-description">Learn essential digital skills, web development, and computer applications. Start your career in the growing tech sector with hands-on training.</p>
+                        <button class="program-cta" onclick="openForm('Diploma in Information Technology')">
                             Express Interest
                             <span>→</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="program-card fade-in" data-program="education">
-                    <img src="resources/program-education.jpg" alt="Early Childhood Education" class="program-image">
+                <!-- Occupational Health & Safety -->
+                <div class="program-card fade-in" data-program="health-safety">
+                    <img src="resources/program-education.jpg" alt="Occupational Health and Safety" class="program-image">
                     <div class="program-content">
-                        <h3>Diploma in Early Childhood Education</h3>
+                        <h3>Occupational Health and Safety Management</h3>
                         <div class="program-duration">24 Months</div>
-                        <p class="program-description">Shape the future by educating young minds. Learn child development, teaching methods, and classroom management.</p>
-                        <button class="program-cta" onclick="openForm('Diploma in Early Childhood Education')">
+                        <p class="program-description">Protect lives and create safer workplaces. Learn risk assessment, safety regulations, and emergency management to become a qualified occupational health and safety professional.</p>
+                        <button class="program-cta" onclick="openForm('Occupational Health and Safety Management')">
                             Express Interest
                             <span>→</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="program-card fade-in" data-program="technical">
-                    <img src="resources/program-technical.jpg" alt="Technical Skills" class="program-image">
+                <!-- Catering & Advanced Science -->
+                <div class="program-card fade-in" data-program="catering">
+                    <img src="resources/program-catering.jpg" alt="Catering and Advanced Science" class="program-image">
                     <div class="program-content">
-                        <h3>Certificate in Technical Skills</h3>
-                        <div class="program-duration">15 Months</div>
-                        <p class="program-description">Hands-on training in carpentry, electrical work, and construction. Build practical skills for immediate employment.</p>
-                        <button class="program-cta" onclick="openForm('Certificate in Technical Skills')">
-                            Express Interest
-                            <span>→</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="program-card fade-in" data-program="entrepreneurship">
-                    <img src="resources/program-entrepreneurship.jpg" alt="Entrepreneurship" class="program-image">
-                    <div class="program-content">
-                        <h3>Diploma in Entrepreneurship</h3>
+                        <h3>Diploma in Catering-Advanced Science</h3>
                         <div class="program-duration">18 Months</div>
-                        <p class="program-description">Turn your business ideas into reality. Learn business planning, funding, and growth strategies for successful ventures.</p>
-                        <button class="program-cta" onclick="openForm('Diploma in Entrepreneurship')">
+                        <p class="program-description">Master the art of food preparation and service while exploring the science behind nutrition, hygiene, and modern culinary techniques. Gain practical and scientific expertise for a successful career in catering and hospitality.</p>
+                        <button class="program-cta" onclick="openForm('Diploma in Catering & Advanced Science')">
                             Express Interest
                             <span>→</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="program-card fade-in" data-program="healthcare">
-                    <img src="resources/program-healthcare.jpg" alt="Healthcare Support" class="program-image">
+                <!-- Hospitality & Tourism -->
+                <div class="program-card fade-in" data-program="hospitality">
+                    <img src="resources/program-hospitality.jpg" alt="Hospitality and Tourism" class="program-image">
                     <div class="program-content">
-                        <h3>Certificate in Healthcare Support</h3>
+                        <h3>Certificate in Hospitality & Tourism Management</h3>
                         <div class="program-duration">12 Months</div>
-                        <p class="program-description">Join the growing healthcare sector. Learn patient care, medical terminology, and healthcare facility operations.</p>
-                        <button class="program-cta" onclick="openForm('Certificate in Healthcare Support')">
+                        <p class="program-description">Step into the dynamic world of hospitality and tourism. Learn customer service, travel operations, and event management to build a rewarding career in hotels, resorts, and the global tourism industry.</p>
+                        <button class="program-cta" onclick="openForm('Certificate in Hospitality & Tourism Management')">
                             Express Interest
                             <span>→</span>
                         </button>
                     </div>
                 </div>
+
+                <!-- Human Resource Management -->
+                <div class="program-card fade-in" data-program="human-resource">
+                    <img src="resources/program-hr.jpg" alt="Human Resource Management" class="program-image">
+                    <div class="program-content">
+                        <h3>Certificate in Human Resource Management</h3>
+                        <div class="program-duration">12 Months</div>
+                        <p class="program-description">Build a career in managing people and organizations. Learn recruitment, employee relations, and performance management to become a skilled HR professional supporting workplace success.</p>
+                        <button class="program-cta" onclick="openForm('Certificate in Human Resource Management')">
+                            Express Interest
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="programs.html" class="cta-button">
+                    View All 10 Programs
+                    <span>→</span>
+                </a>
             </div>
         </div>
     </section>
@@ -746,15 +763,15 @@
                 </div>
 
                 <div class="testimonial fade-in">
-                    <p class="testimonial-text">"The ICT program was exactly what I needed. The hands-on training and supportive teachers helped me land a great job in tech support within 3 months of graduating."</p>
+                    <p class="testimonial-text">"The IT program was exactly what I needed. The hands-on training and supportive teachers helped me land a great job in tech support within 3 months of graduating."</p>
                     <div class="testimonial-author">Lerato Mohapi</div>
-                    <div class="testimonial-program">Certificate in ICT & Digital Skills, 2023</div>
+                    <div class="testimonial-program">Diploma in Information Technology, 2023</div>
                 </div>
 
                 <div class="testimonial fade-in">
-                    <p class="testimonial-text">"As a single mother, the flexible schedule and affordable fees made it possible for me to pursue my dream of becoming a teacher. Now I'm shaping young minds!"</p>
+                    <p class="testimonial-text">"As a chef, the Catering-Advanced Science program gave me both practical cooking skills and scientific knowledge that elevated my career to new heights!"</p>
                     <div class="testimonial-author">Mampho Letsie</div>
-                    <div class="testimonial-program">Diploma in Early Childhood Education, 2022</div>
+                    <div class="testimonial-program">Diploma in Catering-Advanced Science, 2022</div>
                 </div>
             </div>
         </div>
@@ -799,6 +816,9 @@
     <footer class="footer">
         <div class="section-container">
             <p>&copy; 2024 Leano College of Applied Education. Empowering futures through practical education.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                Mankoaneng, Police Station Area, Hlotse, Leribe | +266 5714 3583
+            </p>
         </div>
     </footer>
 
@@ -830,8 +850,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email">
                 </div>
                 
                 <div class="form-group">
@@ -839,11 +859,15 @@
                     <select id="program" name="program">
                         <option value="">Select a program...</option>
                         <option value="Diploma in Business Administration">Diploma in Business Administration</option>
-                        <option value="Certificate in ICT & Digital Skills">Certificate in ICT & Digital Skills</option>
-                        <option value="Diploma in Early Childhood Education">Diploma in Early Childhood Education</option>
-                        <option value="Certificate in Technical Skills">Certificate in Technical Skills</option>
-                        <option value="Diploma in Entrepreneurship">Diploma in Entrepreneurship</option>
-                        <option value="Certificate in Healthcare Support">Certificate in Healthcare Support</option>
+                        <option value="Diploma in Information Technology">Diploma in Information Technology</option>
+                        <option value="Occupational Health and Safety Management">Occupational Health and Safety Management</option>
+                        <option value="Diploma in Catering & Advanced Science">Diploma in Catering & Advanced Science</option>
+                        <option value="Diploma in Business Management">Diploma in Business Management</option>
+                        <option value="Certificate in Hospitality & Tourism Management">Certificate in Hospitality & Tourism Management</option>
+                        <option value="Certificate in Human Resource Management">Certificate in Human Resource Management</option>
+                        <option value="Certificate in Legal Studies">Certificate in Legal Studies</option>
+                        <option value="Certificate in Graphic Design">Certificate in Graphic Design</option>
+                        <option value="Certificate in Beauty Therapy">Certificate in Beauty Therapy</option>
                     </select>
                 </div>
                 
@@ -854,6 +878,347 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script>
+        // Main page functionality
+        class MainPage {
+            constructor() {
+                this.programs = this.getProgramData();
+                this.init();
+            }
+
+            init() {
+                this.setupAnimations();
+                this.setupForm();
+                this.setupProgramCards();
+            }
+
+            getProgramData() {
+                return {
+                    business: {
+                        title: "Diploma in Business Administration",
+                        duration: "18 Months",
+                        image: "resources/program-business.jpg",
+                        overview: "Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry with practical skills that employers value.",
+                        courses: [
+                            { name: "Business Planning and Strategy", description: "Developing effective business plans and strategic approaches" },
+                            { name: "Marketing and Sales Techniques", description: "Learning modern marketing methods and sales strategies" },
+                            { name: "Financial Management Basics", description: "Understanding budgeting, accounting, and financial analysis" },
+                            { name: "Leadership and Team Management", description: "Developing leadership skills and team management techniques" },
+                            { name: "Digital Marketing Tools", description: "Utilizing digital platforms for marketing and brand building" },
+                            { name: "Entrepreneurship Fundamentals", description: "Learning to start and grow successful businesses" }
+                        ],
+                        careers: ["Business Manager", "Marketing Coordinator", "Financial Analyst", "Operations Supervisor", "Entrepreneur", "Sales Manager"],
+                        requirements: ["High school diploma or equivalent", "Basic mathematics proficiency", "English language competency", "Interview with program coordinator", "Interest in business management"]
+                    },
+                    it: {
+                        title: "Diploma In Information Technology",
+                        duration: "36 Months",
+                        image: "resources/program-ict.jpg",
+                        overview: "Learn essential digital skills, web development, and computer applications. Start your career in the growing tech sector with hands-on training.",
+                        courses: [
+                            { name: "Computer Hardware and Software", description: "Understanding computer systems and software applications" },
+                            { name: "Web Development Basics", description: "HTML, CSS, and JavaScript fundamentals" },
+                            { name: "Microsoft Office Suite", description: "Word, Excel, PowerPoint, and Access mastery" },
+                            { name: "Digital Literacy and Security", description: "Internet safety, digital citizenship, and cybersecurity basics" },
+                            { name: "IT Support Fundamentals", description: "Troubleshooting and customer support skills" },
+                            { name: "Database Management", description: "Introduction to database design and SQL" }
+                        ],
+                        careers: ["IT Support Specialist", "Web Developer", "Data Entry Specialist", "Digital Marketing Assistant", "Technical Support", "Computer Technician"],
+                        requirements: ["High school diploma or equivalent", "Basic computer literacy", "Interest in technology", "Problem-solving aptitude", "Logical thinking ability"]
+                    },
+                    "Health & Safety": {
+                        title: "Occupational Health And Safety Management",
+                        duration: "24 Months",
+                        image: "resources/program-education.jpg",
+                        overview: "Protect lives and create safer workplaces. Learn risk assessment, safety regulations, and emergency management to become a qualified occupational health and safety professional.",
+                        courses: [
+                            { name: "Workplace Safety Regulations", description: "Understanding compliance and regulatory requirements" },
+                            { name: "Risk Assessment and Hazard Identification", description: "Identifying and evaluating workplace hazards" },
+                            { name: "Emergency Preparedness", description: "Developing emergency response and crisis management plans" },
+                            { name: "Occupational Health Strategies", description: "Promoting employee wellness and health programs" },
+                            { name: "Safety Training and Communication", description: "Developing effective safety training programs" },
+                            { name: "Environmental Safety Management", description: "Managing environmental hazards and sustainability" }
+                        ],
+                        careers: ["Safety Officer", "Health and Safety Manager", "Risk Assessment Specialist", "Compliance Officer", "Environmental Health Specialist", "Safety Consultant"],
+                        requirements: ["High school diploma or equivalent", "Attention to detail", "Strong communication skills", "Analytical thinking", "Interest in workplace safety"]
+                    },
+                    catering: {
+                        title: "Diploma in Catering-Advanced Science",
+                        duration: "18 Months",
+                        image: "resources/program-catering.jpg",
+                        overview: "Master the art of food preparation and service while exploring the science behind nutrition, hygiene, and modern culinary techniques. Gain practical and scientific expertise for a successful career in catering and hospitality.",
+                        courses: [
+                            { name: "Professional Cooking Techniques", description: "Advanced cooking methods and food presentation" },
+                            { name: "Nutrition and Food Science", description: "Understanding nutritional principles and food chemistry" },
+                            { name: "Food Safety and Hygiene", description: "Implementing HACCP and food safety protocols" },
+                            { name: "Menu Planning and Catering Operations", description: "Designing menus and managing catering events" },
+                            { name: "Hospitality Service Excellence", description: "Customer service and hospitality management" },
+                            { name: "Culinary Science Applications", description: "Applying scientific principles to cooking processes" }
+                        ],
+                        careers: ["Professional Chef", "Catering Manager", "Food Service Supervisor", "Nutrition Assistant", "Kitchen Manager", "Banquet Coordinator"],
+                        requirements: ["High school diploma or equivalent", "Interest in culinary arts", "Basic mathematics skills", "Physical stamina", "Creativity and attention to detail"]
+                    },
+                    "business-management": {
+                        title: "Diploma in Business Management",
+                        duration: "18 Months",
+                        image: "resources/program-business.jpg",
+                        overview: "Develop the skills to lead and manage organizations effectively. Learn strategic planning, operations, and leadership techniques to drive business success in a competitive environment.",
+                        courses: [
+                            { name: "Principles of Management", description: "Foundational management theories and practices" },
+                            { name: "Strategic Business Planning", description: "Developing and implementing business strategies" },
+                            { name: "Operations and Project Management", description: "Managing business operations and projects efficiently" },
+                            { name: "Human Resource Management", description: "Recruitment, training, and employee management" },
+                            { name: "Financial Analysis", description: "Analyzing financial performance and making decisions" },
+                            { name: "Organizational Leadership", description: "Leading teams and driving organizational change" }
+                        ],
+                        careers: ["Business Manager", "Operations Manager", "Project Coordinator", "Department Supervisor", "Management Consultant", "Team Leader"],
+                        requirements: ["High school diploma or equivalent", "Leadership potential", "Analytical skills", "Communication ability", "Problem-solving mindset"]
+                    },
+                    hospitality: {
+                        title: "Certificate in Hospitality & Tourism Management",
+                        duration: "12 Months",
+                        image: "resources/program-hospitality.jpg",
+                        overview: "Step into the dynamic world of hospitality and tourism. Learn customer service, travel operations, and event management to build a rewarding career in hotels, resorts, and the global tourism industry.",
+                        courses: [
+                            { name: "Hospitality Service Standards", description: "Delivering exceptional customer service in hospitality" },
+                            { name: "Tourism and Travel Operations", description: "Managing travel services and tourism activities" },
+                            { name: "Event and Conference Management", description: "Planning and executing events and conferences" },
+                            { name: "Customer Relations Management", description: "Building and maintaining customer relationships" },
+                            { name: "Hotel and Resort Operations", description: "Managing daily operations in accommodation facilities" },
+                            { name: "Tourism Marketing", description: "Promoting tourism destinations and services" }
+                        ],
+                        careers: ["Hotel Manager", "Tour Guide", "Event Coordinator", "Travel Agent", "Resort Supervisor", "Guest Relations Officer"],
+                        requirements: ["High school diploma or equivalent", "Customer service orientation", "Communication skills", "Multitasking ability", "Cultural awareness"]
+                    },
+                    "human-resource-management": {
+                        title: "Certificate in Human Resource Management",
+                        duration: "12 Months",
+                        image: "resources/program-hr.jpg",
+                        overview: "Build a career in managing people and organizations. Learn recruitment, employee relations, and performance management to become a skilled HR professional supporting workplace success.",
+                        courses: [
+                            { name: "Recruitment and Talent Acquisition", description: "Sourcing, interviewing, and hiring candidates" },
+                            { name: "Employee Relations", description: "Managing workplace relationships and conflict resolution" },
+                            { name: "Performance Management Systems", description: "Implementing and managing performance evaluation" },
+                            { name: "Training and Development", description: "Designing and delivering employee training programs" },
+                            { name: "HR Policies and Compliance", description: "Developing and enforcing HR policies" },
+                            { name: "Compensation and Benefits", description: "Designing and managing compensation packages" }
+                        ],
+                        careers: ["HR Assistant", "Recruitment Specialist", "Training Coordinator", "Employee Relations Officer", "HR Administrator", "Talent Management Assistant"],
+                        requirements: ["High school diploma or equivalent", "Good interpersonal skills", "Confidentiality awareness", "Organizational skills", "Interest in people management"]
+                    },
+                    "legal-studies": {
+                        title: "Certificate in Legal Studies",
+                        duration: "12 Months",
+                        image: "resources/program-legal.jpg",
+                        overview: "Begin your journey into the field of law. Learn legal principles, justice systems, and practical skills to support legal professionals and pursue a career in the legal sector.",
+                        courses: [
+                            { name: "Foundations of Law", description: "Introduction to legal systems and principles" },
+                            { name: "Legal Research and Writing", description: "Conducting legal research and drafting documents" },
+                            { name: "Court Procedures", description: "Understanding court systems and legal proceedings" },
+                            { name: "Legal Ethics", description: "Professional responsibility and ethical conduct" },
+                            { name: "Client Communication", description: "Effective communication with clients and professionals" },
+                            { name: "Document Management", description: "Handling legal documents and records" }
+                        ],
+                        careers: ["Legal Assistant", "Paralegal", "Court Clerk", "Legal Secretary", "Compliance Assistant", "Legal Researcher"],
+                        requirements: ["High school diploma or equivalent", "Strong reading comprehension", "Attention to detail", "Ethical mindset", "Good writing skills"]
+                    },
+                    "graphic-design": {
+                        title: "Certificate in Graphic Design",
+                        duration: "12 Months",
+                        image: "resources/program-design.jpg",
+                        overview: "Unlock your creativity and master visual communication. Learn design principles, digital tools, and branding techniques to build a career in the dynamic field of graphic design.",
+                        courses: [
+                            { name: "Design Principles and Color Theory", description: "Fundamental design concepts and color application" },
+                            { name: "Digital Illustration", description: "Creating digital artwork and illustrations" },
+                            { name: "Typography and Layout Design", description: "Type selection and page layout techniques" },
+                            { name: "Branding and Visual Identity", description: "Developing brand identities and visual systems" },
+                            { name: "Creative Software Tools", description: "Mastering Adobe Creative Suite applications" },
+                            { name: "Digital Media Design", description: "Designing for web and digital platforms" }
+                        ],
+                        careers: ["Graphic Designer", "Digital Illustrator", "Brand Designer", "Layout Artist", "Visual Designer", "Creative Assistant"],
+                        requirements: ["High school diploma or equivalent", "Creative aptitude", "Basic computer skills", "Visual thinking ability", "Portfolio of creative work"]
+                    },
+                    "beauty-therapy": {
+                        title: "Certificate in Beauty Therapy",
+                        duration: "12 Months",
+                        image: "resources/program-beauty.jpg",
+                        overview: "Begin a rewarding career in the beauty and wellness industry. Learn skincare, makeup, and spa techniques to provide professional treatments and enhance client confidence and well-being.",
+                        courses: [
+                            { name: "Skincare Treatments", description: "Facial treatments and skincare analysis" },
+                            { name: "Makeup Application", description: "Professional makeup techniques and trends" },
+                            { name: "Manicure and Pedicure Services", description: "Nail care and nail art techniques" },
+                            { name: "Massage and Spa Therapies", description: "Relaxation and therapeutic massage techniques" },
+                            { name: "Client Care and Consultation", description: "Client assessment and treatment planning" },
+                            { name: "Salon Management", description: "Business operations and salon administration" }
+                        ],
+                        careers: ["Beauty Therapist", "Skincare Specialist", "Makeup Artist", "Nail Technician", "Spa Therapist", "Salon Manager"],
+                        requirements: ["High school diploma or equivalent", "Good personal presentation", "Manual dexterity", "Customer service skills", "Creative flair"]
+                    }
+                };
+            }
+
+            setupAnimations() {
+                // Animate elements on scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                anime({
+                                    targets: entry.target,
+                                    opacity: [0, 1],
+                                    translateY: [30, 0],
+                                    duration: 800,
+                                    easing: 'easeOutQuart'
+                                });
+                            }, index * 100);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                // Observe all elements with animation classes
+                document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                    observer.observe(el);
+                });
+
+                // Animate hero elements immediately
+                const heroContent = document.querySelector('.hero-content');
+                const heroImage = document.querySelector('.hero-image');
+                
+                if (heroContent) {
+                    anime({
+                        targets: heroContent,
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    });
+                }
+                
+                if (heroImage) {
+                    anime({
+                        targets: heroImage,
+                        opacity: [0, 1],
+                        translateX: [100, 0],
+                        duration: 1000,
+                        easing: 'easeOutQuart',
+                        delay: 300
+                    });
+                }
+            }
+
+            setupProgramCards() {
+                // Add click handlers to program cards to navigate to programs page
+                document.querySelectorAll('.program-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        // Don't navigate if user clicked the button
+                        if (!e.target.closest('.program-cta')) {
+                            window.location.href = 'programs.html';
+                        }
+                    });
+                });
+            }
+
+            setupForm() {
+                const form = document.getElementById('interestForm');
+                const successMessage = document.getElementById('successMessage');
+                
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        // Get form data
+                        const formData = new FormData(form);
+                        const data = Object.fromEntries(formData);
+                        
+                        // In a real application, you would send this data to a server
+                        console.log('Interest form submitted:', data);
+                        
+                        // Show success message
+                        if (successMessage) {
+                            successMessage.style.display = 'block';
+                            anime({
+                                targets: successMessage,
+                                opacity: [0, 1],
+                                duration: 500,
+                                easing: 'easeOutQuart'
+                            });
+                            
+                            // Reset form
+                            form.reset();
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                anime({
+                                    targets: successMessage,
+                                    opacity: [1, 0],
+                                    duration: 500,
+                                    easing: 'easeOutQuart',
+                                    complete: () => {
+                                        successMessage.style.display = 'none';
+                                    }
+                                });
+                            }, 5000);
+                        }
+                    });
+                }
+            }
+        }
+
+        // Global functions for form handling
+        function openForm(programName = '') {
+            const formOverlay = document.getElementById('formOverlay');
+            const programSelect = document.getElementById('program');
+            
+            if (programSelect && programName) {
+                // Try to find the program in the dropdown
+                for (let option of programSelect.options) {
+                    if (option.value === programName) {
+                        programSelect.value = programName;
+                        break;
+                    }
+                }
+            }
+            
+            formOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Animate form appearance
+            anime({
+                targets: '.form-container',
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                duration: 400,
+                easing: 'easeOutBack'
+            });
+        }
+
+        function closeForm() {
+            const formOverlay = document.getElementById('formOverlay');
+            
+            anime({
+                targets: '.form-container',
+                scale: [1, 0.8],
+                opacity: [1, 0],
+                duration: 300,
+                easing: 'easeInBack',
+                complete: () => {
+                    formOverlay.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Initialize main page
+        document.addEventListener('DOMContentLoaded', () => {
+            window.mainPage = new MainPage();
+            
+            // Close form when clicking outside
+            document.getElementById('formOverlay').addEventListener('click', (e) => {
+                if (e.target.id === 'formOverlay') {
+                    closeForm();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
