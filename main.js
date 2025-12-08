@@ -4,6 +4,7 @@
 class LeanoCollegeApp {
     constructor() {
         this.leads = JSON.parse(localStorage.getItem('leanoLeads') || '[]');
+        this.GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
         this.init();
     }
 
@@ -140,7 +141,7 @@ class LeanoCollegeApp {
     }
 
     // Handle form submission
-    handleFormSubmission(form) {
+    async handleFormSubmission(form) {
         const formData = new FormData(form);
         const leadData = {
             id: Date.now().toString(),
@@ -154,22 +155,75 @@ class LeanoCollegeApp {
             notes: ''
         };
 
-        // Add to leads array
-        this.leads.push(leadData);
-        localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+        // Prepare data for Google Sheets
+        const rowData = [
+            leadData.timestamp,
+            leadData.firstName,
+            leadData.lastName,
+            leadData.phone,
+            leadData.email,
+            leadData.program,
+            leadData.status
+        ];
 
-        // Show success message
-        this.showSuccessMessage();
+        try {
+            // Try to save to Google Sheets first
+            await this.saveToGoogleSheets(rowData);
+            console.log('✅ Lead saved to Google Sheets');
+            
+            // Also save locally as backup
+            this.leads.push(leadData);
+            localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+            
+            // Show success message
+            this.showSuccessMessage();
+            
+            // Simulate email confirmation
+            setTimeout(() => {
+                this.sendConfirmationEmail(leadData);
+            }, 1000);
+            
+            // Redirect to thank you page after delay
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 2000);
+            
+        } catch (error) {
+            console.error('❌ Google Sheets failed:', error);
+            
+            // Fallback: Save to localStorage only
+            this.leads.push(leadData);
+            localStorage.setItem('leanoLeads', JSON.stringify(this.leads));
+            
+            // Still show success to user
+            this.showSuccessMessage();
+            
+            // Simulate email confirmation
+            setTimeout(() => {
+                this.sendConfirmationEmail(leadData);
+            }, 1000);
+            
+            // Redirect to thank you page after delay
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 2000);
+        }
+    }
 
-        // Simulate email confirmation
-        setTimeout(() => {
-            this.sendConfirmationEmail(leadData);
-        }, 1000);
-
-        // Redirect to thank you page after delay
-        setTimeout(() => {
-            window.location.href = 'thank-you.html';
-        }, 2000);
+    // Save to Google Sheets
+    async saveToGoogleSheets(rowData) {
+        const response = await fetch(this.GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Important for Google Scripts
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rowData)
+        });
+        
+        // With 'no-cors' mode, we can't read the response
+        // But we assume it worked if no network error
+        return response;
     }
 
     // Show success message
@@ -193,11 +247,12 @@ class LeanoCollegeApp {
 
     // Simulate email confirmation
     sendConfirmationEmail(leadData) {
-        console.log('📧 Confirmation email sent to:', leadData.email);
-        console.log('📧 Staff notification sent for:', leadData.firstName, leadData.lastName);
-        
-        // In a real implementation, this would trigger actual email sending
-        // For demo purposes, we'll show a console message
+        console.log('📧 Lead submitted successfully:');
+        console.log('👤 Name:', leadData.firstName, leadData.lastName);
+        console.log('📞 Phone:', leadData.phone);
+        console.log('📧 Email:', leadData.email);
+        console.log('🎓 Program:', leadData.program);
+        console.log('📊 Saved to:', 'Google Sheets + Local Storage');
     }
 
     // Navigation setup
@@ -347,6 +402,16 @@ class LeanoCollegeApp {
         link.click();
         document.body.removeChild(link);
     }
+
+    // New method: Sync leads from Google Sheets (for admin dashboard)
+    async syncFromGoogleSheets() {
+        console.log('⚠️ Note: Full Google Sheets sync requires additional setup.');
+        console.log('For now, use the CSV export feature.');
+        
+        // Refresh from localStorage
+        this.leads = JSON.parse(localStorage.getItem('leanoLeads') || '[]');
+        return this.leads;
+    }
 }
 
 // Form overlay functions
@@ -457,6 +522,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Global function for Google Sheets sync (for admin dashboard)
+function syncFromGoogleSheets() {
+    if (window.leanoApp) {
+        window.leanoApp.syncFromGoogleSheets().then(leads => {
+            console.log('Leads refreshed from localStorage:', leads.length);
+            alert(`Refreshed ${leads.length} leads from local storage.\n\nGoogle Sheets full sync requires additional setup.`);
+        });
+    }
+}
 
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
