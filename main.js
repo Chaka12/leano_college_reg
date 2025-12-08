@@ -4,7 +4,7 @@
 class LeanoCollegeApp {
     constructor() {
         this.leads = JSON.parse(localStorage.getItem('leanoLeads') || '[]');
-        this.GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+        this.GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNr7xVoZNOIaPAYGEh6CuChcM_SfbBphOK1lCv84VEuqSB3ZmZay_oId2_3TqSvWPirA/exec';
         this.init();
     }
 
