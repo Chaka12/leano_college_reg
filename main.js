@@ -119,14 +119,32 @@ class LeanoCollegeApp {
 
     // Form handlers
     setupFormHandlers() {
+        // Check if we're on the homepage
+        const isHomepage = window.location.pathname.includes('index.html') || 
+                          window.location.pathname === '/' || 
+                          window.location.pathname.endsWith('/');
+        
+        // Skip form setup on homepage (it has its own handler)
+        if (isHomepage) {
+            console.log('🏠 Skipping main.js form setup on homepage');
+            return;
+        }
+        
         const form = document.getElementById('interestForm');
         const overlay = document.getElementById('formOverlay');
         
         if (form) {
-            form.addEventListener('submit', (e) => {
+            // Remove any existing listeners first
+            const newForm = form.cloneNode(true);
+            form.parentNode.replaceChild(newForm, form);
+            
+            // Add fresh listener
+            newForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                this.handleFormSubmission(form);
+                this.handleFormSubmission(newForm);
             });
+            
+            console.log('✅ Main.js form handler setup');
         }
 
         // Auto-populate program selection
@@ -139,7 +157,6 @@ class LeanoCollegeApp {
             }
         }
     }
-
     // Handle form submission
     async handleFormSubmission(form) {
         const formData = new FormData(form);
