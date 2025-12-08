@@ -586,6 +586,12 @@
             transform: translateY(-1px);
         }
 
+        .submit-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .success-message {
             background: #d4edda;
             color: #155724;
@@ -872,7 +878,7 @@
                     </select>
                 </div>
                 
-                <button type="submit" class="submit-button">
+                <button type="submit" class="submit-button" id="submitButton">
                     Submit Interest
                 </button>
             </form>
@@ -889,14 +895,8 @@
         setupHomepageAnimations();
         setupProgramCards();
         
-        // Override the form submission for homepage
-        const form = document.getElementById('interestForm');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                handleHomepageFormSubmission(form);
-            });
-        }
+        // Setup form with single listener
+        setupFormWithSingleListener();
         
         // Close form when clicking outside
         document.getElementById('formOverlay').addEventListener('click', (e) => {
@@ -964,36 +964,67 @@
         });
     }
     
-    async function handleHomepageFormSubmission(form) {
-        const formData = new FormData(form);
-        const leadData = {
-            id: Date.now().toString(),
-            timestamp: new Date().toISOString(),
-            firstName: formData.get('firstName'),
-            lastName: formData.get('lastName'),
-            phone: formData.get('phone'),
-            email: formData.get('email'),
-            program: formData.get('program') || 'Not specified',
-            status: 'new',
-            notes: ''
-        };
+    function setupFormWithSingleListener() {
+        const form = document.getElementById('interestForm');
+        if (!form) return;
         
-        // Prepare data for Google Sheets
-        const rowData = [
-            leadData.timestamp,
-            leadData.firstName,
-            leadData.lastName,
-            leadData.phone,
-            leadData.email,
-            leadData.program,
-            leadData.status
-        ];
+        // Remove any existing event listeners first by cloning the form
+        const newForm = form.cloneNode(true);
+        form.parentNode.replaceChild(newForm, form);
         
-        // Use the same Google Script URL from main.js
-        const GOOGLE_SCRIPT_URL = window.leanoApp.GOOGLE_SCRIPT_URL;
+        // Add ONLY ONE event listener
+        newForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            await handleFormSubmission(this);
+        });
+        
+        console.log('✅ Form setup with single listener');
+    }
+    
+    async function handleFormSubmission(form) {
+        // Prevent multiple submissions
+        if (window.isFormSubmitting) {
+            console.log('⏳ Form already submitting, please wait...');
+            return;
+        }
+        
+        window.isFormSubmitting = true;
+        
+        // Disable submit button
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : 'Submit Interest';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+        }
         
         try {
+            const formData = new FormData(form);
+            const leadData = {
+                id: Date.now().toString(),
+                timestamp: new Date().toISOString(),
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                program: formData.get('program') || 'Not specified',
+                status: 'new',
+                notes: ''
+            };
+            
+            // Prepare data for Google Sheets
+            const rowData = [
+                leadData.timestamp,
+                leadData.firstName,
+                leadData.lastName,
+                leadData.phone,
+                leadData.email,
+                leadData.program,
+                leadData.status
+            ];
+            
             // Save to Google Sheets
+            const GOOGLE_SCRIPT_URL = window.leanoApp.GOOGLE_SCRIPT_URL;
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -1008,59 +1039,72 @@
             localStorage.setItem('leanoLeads', JSON.stringify(window.leanoApp.leads));
             
             // Show success message
-            const successMessage = document.getElementById('successMessage');
-            const formElement = document.getElementById('interestForm');
+            showSuccessMessage();
             
-            if (successMessage && formElement) {
-                successMessage.style.display = 'block';
-                formElement.style.display = 'none';
-                
-                anime({
-                    targets: successMessage,
-                    scale: [0.9, 1],
-                    opacity: [0, 1],
-                    duration: 500,
-                    easing: 'easeOutBack'
-                });
-                
-                // Redirect to thank-you page after 2 seconds
-                setTimeout(() => {
-                    window.location.href = 'thank-you.html';
-                }, 2000);
-            }
+            // Redirect to thank-you page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 2000);
             
         } catch (error) {
-            console.error('❌ Google Sheets failed:', error);
+            console.error('❌ Form submission error:', error);
             
             // Fallback: Save to localStorage only
+            const formData = new FormData(form);
+            const leadData = {
+                id: Date.now().toString(),
+                timestamp: new Date().toISOString(),
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                program: formData.get('program') || 'Not specified',
+                status: 'new',
+                notes: ''
+            };
+            
             window.leanoApp.leads.push(leadData);
             localStorage.setItem('leanoLeads', JSON.stringify(window.leanoApp.leads));
             
-            // Still show success
-            const successMessage = document.getElementById('successMessage');
-            const formElement = document.getElementById('interestForm');
+            // Still show success to user
+            showSuccessMessage();
             
-            if (successMessage && formElement) {
-                successMessage.style.display = 'block';
-                formElement.style.display = 'none';
-                
-                anime({
-                    targets: successMessage,
-                    scale: [0.9, 1],
-                    opacity: [0, 1],
-                    duration: 500,
-                    easing: 'easeOutBack'
-                });
-                
-                // Redirect to thank-you page after 2 seconds
-                setTimeout(() => {
-                    window.location.href = 'thank-you.html';
-                }, 2000);
-            }
+            // Redirect anyway
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 2000);
+            
+        } finally {
+            // Re-enable button after 3 seconds
+            setTimeout(() => {
+                window.isFormSubmitting = false;
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            }, 3000);
         }
     }
     
-    // Keep the existing openForm and closeForm functions
+    function showSuccessMessage() {
+        const successMessage = document.getElementById('successMessage');
+        const form = document.getElementById('interestForm');
+        
+        if (successMessage && form) {
+            successMessage.style.display = 'block';
+            form.style.display = 'none';
+            
+            anime({
+                targets: successMessage,
+                scale: [0.9, 1],
+                opacity: [0, 1],
+                duration: 500,
+                easing: 'easeOutBack'
+            });
+        }
+    }
+    
+    // Global functions for form overlay
     function openForm(programName = '') {
         const overlay = document.getElementById('formOverlay');
         const programSelect = document.getElementById('program');
@@ -1071,6 +1115,18 @@
             
             if (programName && programSelect) {
                 programSelect.value = programName;
+            }
+            
+            // Reset form state when opening
+            const form = document.getElementById('interestForm');
+            const successMessage = document.getElementById('successMessage');
+            const submitButton = document.getElementById('submitButton');
+            
+            if (form) form.style.display = 'block';
+            if (successMessage) successMessage.style.display = 'none';
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Interest';
             }
             
             anime({
@@ -1106,6 +1162,9 @@
                     if (successMessage) {
                         successMessage.style.display = 'none';
                     }
+                    
+                    // Reset submission flag when form closes
+                    window.isFormSubmitting = false;
                 }
             });
         }
