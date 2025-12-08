@@ -776,14 +776,14 @@
                  <option value="">Select a program...</option>
                  <option value="Diploma in Business Administration">Diploma in Business Administration</option>
                  <option value="Diploma in Information Technology">Diploma in Information Technology</option>
-                 <option value="Occupational Health and Safety Management">Occupational Health and Safety Management</option>
+                 <option value="Diploma in Occupational Health and Safety Management">Diploma in Occupational Health and Safety Management</option>
                  <option value="Diploma in Catering & Advanced Science">Certificate in Catering & Advanced Science</option>
                  <option value="Diploma in Business Management">Diploma in Business Management</option>
-                 <option value="Certificate in Hospitality & Tourism Management">Diploma in Hospitality & Tourism Management</option>
-                 <option value="Certificate in Human Resource Management">Diploma in Human Resource Management</option>
-                 <option value="Certificate in Legal Studies">Diploma in Legal Studies</option>
-                 <option value="Certificate in Graphic Design">Diploma in Graphic Design</option>
-                 <option value="Certificate in Beauty Therapy">Diploma in Beauty Therapy</option>
+                 <option value="Diploma in Hospitality & Tourism Management">Diploma in Hospitality & Tourism Management</option>
+                 <option value="Diploma in Human Resource Management">Diploma in Human Resource Management</option>
+                 <option value="Diploma in Legal Studies">Diploma in Legal Studies</option>
+                 <option value="Diploma in Graphic Design">Diploma in Graphic Design</option>
+                 <option value="Diploma in Beauty Therapy">Diploma in Beauty Therapy</option>
             </select>
         </div>
     </section>
@@ -861,7 +861,7 @@
                     <img src="resources/program-education.jpg" alt="Occupational Health And Safety Management" class="program-image">
                     <div class="program-content">
                         <div class="program-header">
-                            <h3 class="program-title">Occupational Health And Safety Management</h3>
+                            <h3 class="program-title">Diploma in Occupational Health And Safety Management</h3>
                             <div class="program-duration">2 Years</div>
                         </div>
                         <p class="program-description">Protect lives and create safer workplaces. Learn risk assessment, safety regulations, and emergency management to become a qualified occupational health and safety professional.</p>
@@ -1142,7 +1142,7 @@
             
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number" data-count="2500">0</span>
+                    <span class="stat-number" data-count="1500">0</span>
                     <div class="stat-label">Students Graduated</div>
                 </div>
                 <div class="stat-item">
@@ -1248,17 +1248,17 @@
                 <div class="form-group">
                     <label for="program">Program of Interest</label>
                     <select id="program" name="program">
-                        <option value="">Select a program...</option>
-                        <option value="Diploma in Business Administration">Diploma in Business Administration</option>
-                        <option value="Diploma in Information Technology">Diploma in Information Technology</option>
-                        <option value="Occupational Health and Safety Management">Occupational Health and Safety Management</option>
-                        <option value="Diploma in Catering & Advanced Science">Certificate in Catering & Advanced Science</option>
-                        <option value="Diploma in Business Management">Diploma in Business Management</option>
-                        <option value="Certificate in Hospitality & Tourism Management">Diploma in Hospitality & Tourism Management</option>
-                        <option value="Certificate in Human Resource Management">Diploma in Human Resource Management</option>
-                        <option value="Certificate in Legal Studies">Diploma in Legal Studies</option>
-                        <option value="Certificate in Graphic Design">Diploma in Graphic Design</option>
-                        <option value="Certificate in Beauty Therapy">Diploma in Beauty Therapy</option>
+                         <option value="">Select a program...</option>
+                         <option value="Diploma in Business Administration">Diploma in Business Administration</option>
+                         <option value="Diploma in Information Technology">Diploma in Information Technology</option>
+                         <option value="Diploma in Occupational Health and Safety Management">Diploma in Occupational Health and Safety Management</option>
+                         <option value="Diploma in Catering & Advanced Science">Certificate in Catering & Advanced Science</option>
+                         <option value="Diploma in Business Management">Diploma in Business Management</option>
+                         <option value="Diploma in Hospitality & Tourism Management">Diploma in Hospitality & Tourism Management</option>
+                         <option value="Diploma in Human Resource Management">Diploma in Human Resource Management</option>
+                         <option value="Diploma in Legal Studies">Diploma in Legal Studies</option>
+                         <option value="Diploma in Graphic Design">Diploma in Graphic Design</option>
+                         <option value="Diploma in Beauty Therapy">Diploma in Beauty Therapy</option>
                     </select>
                 </div>
                 
@@ -1353,7 +1353,7 @@
                     },
                     "business-management": {
                         title: "Diploma in Business Management",
-                        duration: "18 Months",
+                        duration: "3 Years",
                         image: "resources/program-business.jpg",
                         overview: "Develop the skills to lead and manage organizations effectively. Learn strategic planning, operations, and leadership techniques to drive business success in a competitive environment.",
                         courses: [
@@ -1432,7 +1432,7 @@
                         requirements: ["High school diploma or equivalent", "Creative aptitude", "Basic computer skills", "Visual thinking ability", "Portfolio of creative work"]
                     },
                     "beauty-therapy": {
-                        title: "Certificate in Beauty Therapy",
+                        title: "Diploma in Beauty Therapy",
                         duration: "2 Years",
                         image: "resources/program-beauty.jpg",
                         overview: "Begin a rewarding career in the beauty and wellness industry. Learn skincare, makeup, and spa techniques to provide professional treatments and enhance client confidence and well-being.",
@@ -1513,7 +1513,7 @@
                             const statNumbers = document.querySelectorAll('.stat-number');
                             statNumbers.forEach(stat => {
                                 const target = parseInt(stat.dataset.count);
-                                this.animateNumber(stat, 0, target, 2000);
+                                this.animateNumber(stat, 0, target, 1000);
                             });
                             observer.unobserve(entry.target);
                         }
