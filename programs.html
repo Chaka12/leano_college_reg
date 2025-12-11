@@ -792,38 +792,7 @@
     <section class="programs-section">
         <div class="section-container">
             <div class="programs-grid" id="programsGrid">
-                <!-- Business Administration -->
-                <div class="program-card" data-category="business" data-duration="18" data-keywords="business administration management marketing entrepreneurship">
-                    <img src="resources/program-business.jpg" alt="Business Administration" class="program-image">
-                    <div class="program-content">
-                        <div class="program-header">
-                            <h3 class="program-title">Diploma in Business Administration</h3>
-                            <div class="program-duration">3 Years</div>
-                        </div>
-                        <p class="program-description">Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry with practical skills that employers value.</p>
-                        
-                        <div class="program-highlights">
-                            <h4>What You'll Learn:</h4>
-                            <ul class="highlights-list">
-                                <li>Business planning and strategy</li>
-                                <li>Marketing and sales techniques</li>
-                                <li>Financial management basics</li>
-                                <li>Leadership and team management</li>
-                                <li>Digital marketing tools</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="program-actions">
-                            <button class="btn-primary" onclick="openForm('Diploma in Business Administration')">
-                                Apply
-                            </button>
-                            <button class="btn-secondary" onclick="showProgramDetail('business')">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- ICT & Digital Skills -->
                 <div class="program-card" data-category="technology" data-duration="3" data-keywords="ict digital skills computer technology web development">
                     <img src="resources/program-ict.jpg" alt="Information Technology" class="program-image">
@@ -1287,22 +1256,7 @@
 
             getProgramData() {
                 return {
-                    business: {
-                        title: "Diploma in Business Administration",
-                        duration: "3 Years",
-                        image: "resources/program-business.jpg",
-                        overview: "Master the fundamentals of business management, marketing, and entrepreneurship. Prepare for leadership roles in any industry with practical skills that employers value.",
-                        courses: [
-                            { name: "Business Planning and Strategy", description: "Developing effective business plans and strategic approaches" },
-                            { name: "Marketing and Sales Techniques", description: "Learning modern marketing methods and sales strategies" },
-                            { name: "Financial Management Basics", description: "Understanding budgeting, accounting, and financial analysis" },
-                            { name: "Leadership and Team Management", description: "Developing leadership skills and team management techniques" },
-                            { name: "Digital Marketing Tools", description: "Utilizing digital platforms for marketing and brand building" },
-                            { name: "Entrepreneurship Fundamentals", description: "Learning to start and grow successful businesses" }
-                        ],
-                        careers: ["Business Manager", "Marketing Coordinator", "Financial Analyst", "Operations Supervisor", "Entrepreneur", "Sales Manager"],
-                        requirements: ["High school diploma or equivalent", "Basic mathematics proficiency", "English language competency", "Interview with program coordinator", "Interest in business management"]
-                    },
+                    
                     it: {
                         title: "Diploma in Information Technology",
                         duration: "3 Years",
